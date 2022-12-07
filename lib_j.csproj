@@ -34,6 +34,23 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="control\Custom.cs" />
+    <Compile Include="control\Manager.cs" />
+    <Compile Include="control\SignUp.cs" />
+    <Compile Include="control\Login.cs" />
+    <Compile Include="control\Library.cs" />
+    <Compile Include="model\Book.cs" />
+    <Compile Include="model\History.cs" />
+    <Compile Include="model\Membership.cs" />
+    <Compile Include="view\Screen.cs" />
+    <Compile Include="MainApp.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,7 +23,7 @@ namespace lib_j.control
             }
         }
 
-        public void readMemberListData(List<Membership> memberList)
+        public void readMemberListData()
         {
             Stream ws;
             FileInfo fileMemberInfo = new FileInfo("memberInfomation.dat");
@@ -38,22 +38,22 @@ namespace lib_j.control
                 {
                     Stream rs = new FileStream("memberInfomation.dat", FileMode.Open); //일단 불러온다.
                     BinaryFormatter deserializer = new BinaryFormatter();
-                    memberList = (List<Membership>)deserializer.Deserialize(rs);       //역직렬화,리스트에 저장함.
+                    Library.memberList = (List<Membership>)deserializer.Deserialize(rs);       //역직렬화,리스트에 저장함.
                     rs.Close();
                 }
             }
 
         } //회원가입 리스트 불러오기
 
-        public void updataMemberListData(List<Membership> memberList)
+        public void updataMemberListData()
         {
             Stream ws = new FileStream("memberInfomation.dat", FileMode.Create);
             BinaryFormatter serializer = new BinaryFormatter();
-            serializer.Serialize(ws, memberList);     //직렬화(저장)
+            serializer.Serialize(ws, Library.memberList);     //직렬화(저장)
             ws.Close();
         } //회원가입 리스트에 추가하기
 
-        public void readBookListData(List<Book> bookList)
+        public void readBookListData()
         {
             Stream ws;
             FileInfo fileBookInfo = new FileInfo("bookInfomation.dat");
@@ -68,21 +68,21 @@ namespace lib_j.control
                 {
                     Stream rs = new FileStream("bookInfomation.dat", FileMode.Open); //일단 불러온다.
                     BinaryFormatter deserializer = new BinaryFormatter();
-                    bookList = (List<Book>)deserializer.Deserialize(rs);       //역직렬화,리스트에 저장함.
+                    Library.bookList = (List<Book>)deserializer.Deserialize(rs);       //역직렬화,리스트에 저장함.
                     rs.Close();
                 }
             }
         } //책 리스트 불러오기
 
-        public void updataBookListData(List<Book> bookList)
+        public void updataBookListData()
         {
             Stream ws = new FileStream("bookInfomation.dat", FileMode.Create);
             BinaryFormatter serializer = new BinaryFormatter();
-            serializer.Serialize(ws, bookList);     //직렬화(저장)
+            serializer.Serialize(ws, Library.bookList);     //직렬화(저장)
             ws.Close();
         } //책 리스트에 추가하기
 
-        public void readHistoryData(List<History> historyList)
+        public void readHistoryData()
         {
             Stream ws;
             FileInfo fileHistoryInfo = new FileInfo("historyInfomation.dat");
@@ -97,23 +97,19 @@ namespace lib_j.control
                 {
                     Stream rs = new FileStream("historyInfomation.dat", FileMode.Open); //일단 불러온다.
                     BinaryFormatter deserializer = new BinaryFormatter();
-                    historyList = (List<History>)deserializer.Deserialize(rs);       //역직렬화,리스트에 저장함.
+                    Library.historyList = (List<History>)deserializer.Deserialize(rs);       //역직렬화,리스트에 저장함.
                     rs.Close();
                 }
             }
         } //대출 반납 리스트 불러오기
 
-        public void updataHistoryData(List<History> historyList)
+        public void updataHistoryData()
         {
             Stream ws = new FileStream("historyInfomation.dat", FileMode.Create);
             BinaryFormatter serializer = new BinaryFormatter();
-            serializer.Serialize(ws, historyList);     //직렬화(저장)
+            serializer.Serialize(ws, Library.historyList);     //직렬화(저장)
             ws.Close();
         } //대출 반납 리스트에 추가하기
 
-        public void historyPrint()
-        {
-            
-        }
     }
 }

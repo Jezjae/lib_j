@@ -19,7 +19,8 @@ namespace lib_j
 
             Screen.Instance.basicScreen();
 
-            Custom.Instance.readMemberListData(Library.memberList);
+            Custom.Instance.readBookListData(); //정보 가져오기
+            Custom.Instance.readMemberListData();
 
             Console.Write("      회원 ID를 입력하세요 (English and Number) : ");
 
@@ -343,6 +344,9 @@ namespace lib_j
 
                                         Console.WriteLine();
                                         Console.WriteLine("   책 '" + Library.bookList[i].Title + "' 대출 완료 !");
+                                        Custom.Instance.updataBookListData();
+                                        Custom.Instance.updataMemberListData();
+                                        Custom.Instance.updataHistoryData();
 
                                     }
                                 }
@@ -359,10 +363,10 @@ namespace lib_j
                             Console.Clear();
                             Screen.Instance.basicScreen();
                             Console.WriteLine();
-                            Console.WriteLine("                      ▣ 책 이름으로 검색 ▣");
+                            Console.WriteLine("                      ▣ 책 대출 ▣");
                             Console.WriteLine();
                             Console.WriteLine();
-                            Console.Write("   검색 결과가 없습니다. 검색하려는 책의 이름을 정확히 입력하세요. : ");
+                            Console.Write("   대여하려는 책의 이름을 정확히 입력하세요. : ");
                         }
                     }
                     Console.WriteLine();
@@ -394,17 +398,19 @@ namespace lib_j
                     }
                     Console.WriteLine("   " + tempName + "님의 대출 책 목록");
                     Console.WriteLine();
-                    int tempNum = 1; //리스트의 인덱스 순서대로 출력하는 방법 없나??
                     List<History> tempBook = new List<History>();
                     for (int i = 0; i < Library.bookLoanList.Count; i++)
                     {
                         if (Library.bookLoanList[i].Name == tempName)
                         {
-                            Console.WriteLine("   " + tempNum + ". 대출한 책 : '" + Library.bookLoanList[i].Title + "'");
                             History.Instance.Title = Library.bookLoanList[i].Title;
                             tempBook.Add(History.Instance);
-                            tempNum++;
                         }
+                    }
+                    for (int i = 0; i < tempBook.Count; i++)
+                    {
+                        Console.WriteLine("   " + i+1 + ". 대출한 책 : '" + Library.bookLoanList[i].Title + "'");
+                        Console.WriteLine();
                     }
                     Console.WriteLine();
                     Console.WriteLine();
@@ -451,6 +457,10 @@ namespace lib_j
                                         
                                         Console.WriteLine();
                                         Console.WriteLine("   책 '" + tempBook[i].Title + "' 반납 완료 !");
+
+                                        Custom.Instance.updataBookListData();
+                                        Custom.Instance.updataMemberListData();
+                                        Custom.Instance.updataHistoryData();
 
                                     }
                                 }
@@ -558,6 +568,7 @@ namespace lib_j
                                 Console.WriteLine();
                                 Console.Write("   새 휴대폰 번호를 입력하세요 ('-' 제외하고 입력) : ");
                                 Library.memberList[i].Phone = Console.ReadLine();
+                                Custom.Instance.updataMemberListData();
                                 Console.WriteLine();
                                 Console.WriteLine("   휴대폰 번호가 수정되었습니다 ! ");
                                 Console.WriteLine();
@@ -578,6 +589,7 @@ namespace lib_j
                                 Console.WriteLine();
                                 Console.Write("   새 주소를 입력하세요 : ");
                                 Library.memberList[i].Address = Console.ReadLine();
+                                Custom.Instance.updataMemberListData();
                                 Console.WriteLine();
                                 Console.WriteLine("   주소가 수정되었습니다 ! ");
                                 Console.WriteLine();

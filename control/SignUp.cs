@@ -14,6 +14,7 @@ namespace lib_j
     {
         public void signUp()
         {
+            Custom.Instance.readMemberListData();
             Screen.Instance.basicScreen();
             Console.Write("      회원 ID 입력 (English and Number) : ");
             string id = Console.ReadLine();
@@ -44,7 +45,7 @@ namespace lib_j
 
             Library.memberList.Add(Membership.Instance);
 
-            Custom.Instance.updataMemberListData(Library.memberList);
+            Custom.Instance.updataMemberListData();
 
             Console.WriteLine();
             Console.WriteLine("      회원가입이 완료 되었습니다 ! ");

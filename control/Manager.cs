@@ -41,6 +41,7 @@ namespace lib_j.control
                 if (num == "1")
                 {
                     Console.Clear();
+                    Custom.Instance.readMemberListData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                   ▣ 등록 회원 리스트 ▣");
@@ -80,6 +81,7 @@ namespace lib_j.control
                 else if (num == "2")
                 {
                     Console.Clear();
+                    Custom.Instance.readBookListData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                      ▣ 책 리스트 ▣");
@@ -120,6 +122,7 @@ namespace lib_j.control
                 else if (num == "3")
                 {
                     Console.Clear();
+                    Custom.Instance.readMemberListData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                      ▣ 회원 검색 ▣");
@@ -175,6 +178,7 @@ namespace lib_j.control
                 else if (num == "4")
                 {
                     Console.Clear();
+                    Custom.Instance.readMemberListData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                      ▣ 회원 삭제 ▣");
@@ -192,6 +196,7 @@ namespace lib_j.control
                             if (Library.memberList[i].Name == name)
                             {
                                 Library.memberList.Remove(Library.memberList[i]);
+                                Custom.Instance.updataMemberListData();
                                 isName = true;
                                 break;
                             }
@@ -223,6 +228,7 @@ namespace lib_j.control
                 else if (num == "5")
                 {
                     Console.Clear();
+                    Custom.Instance.readBookListData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                    ▣ 책 정보 수정 ▣");
@@ -231,7 +237,7 @@ namespace lib_j.control
                     Console.Write("   수량 수정하려는 책의 이름 (띄어쓰기 상관없이 입력 가능) : ");
 
                     bool isTitle = false;
-                    while(isTitle == false)
+                    while (isTitle == false)
                     {
                         string title = Console.ReadLine();
 
@@ -245,8 +251,9 @@ namespace lib_j.control
                                 Console.WriteLine("                    ▣ 책 정보 수정 ▣");
                                 Console.WriteLine();
                                 Console.WriteLine();
-                                Console.Write("   책 '" + Library.bookList[i].Title +"' 수정할 수량 입력 : ");
+                                Console.Write("   책 '" + Library.bookList[i].Title + "' 수정할 수량 입력 : ");
                                 Library.bookList[i].Quantity = Convert.ToInt32(Console.ReadLine()); ;
+                                Custom.Instance.updataBookListData();
                                 isTitle = true;
                                 break;
                             }
@@ -262,7 +269,7 @@ namespace lib_j.control
                             Console.WriteLine();
                             Console.Write("   정확한 책의 이름을 입력해 주세요. (띄어쓰기 상관없이 입력 가능) : ");
                         }
-
+                    }
                         Console.WriteLine();
                         Console.WriteLine("   책 정보가 수정 되었습니다 ! ");
                         Console.WriteLine();
@@ -275,11 +282,12 @@ namespace lib_j.control
                             isManager = false;
                             break;
                         }
-                    }
+                    
                 } //책 정보 수정
                 else if (num == "6")
                 {
                     Console.Clear();
+                    Custom.Instance.readBookListData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                    ▣ 신규 책 등록 ▣");
@@ -315,7 +323,7 @@ namespace lib_j.control
 
                     Library.bookList.Add(Book.Instance);
 
-                    Custom.Instance.updataBookListData(Library.bookList);
+                    Custom.Instance.updataBookListData();
 
                     Console.WriteLine();
                     Console.WriteLine();
@@ -331,6 +339,7 @@ namespace lib_j.control
                 else if (num == "7")
                 {
                     Console.Clear();
+                    Custom.Instance.readBookListData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                      ▣ 책 삭제 ▣");
@@ -379,6 +388,7 @@ namespace lib_j.control
                 else if (num == "8")
                 {
                     Console.Clear();
+                    Custom.Instance.readHistoryData();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
                     Console.WriteLine("                 ▣ 책 대여 / 반납 기록 ▣");

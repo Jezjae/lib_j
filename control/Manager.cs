@@ -18,7 +18,7 @@ namespace lib_j.control
             bool isPw = false;
             while (isPw == false)
             {
-                string pw = Console.ReadLine();
+                string pw = Custom.Instance.ReadPhone();
 
                 if (pw == managerPw)
                 {
@@ -36,7 +36,7 @@ namespace lib_j.control
             {
                 Console.Clear();
                 Screen.Instance.managerScreen();
-                string num = Console.ReadLine();
+                string num = Custom.Instance.ReadPhone();
 
                 if (num == "1")
                 {
@@ -68,8 +68,8 @@ namespace lib_j.control
                     Console.WriteLine("      등록된 총 회원 수 : " + Library.memberList.Count + " 명");
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Console.ReadLine();
+                    Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                    string outNum = Custom.Instance.ReadPhone();
 
                     if (outNum == "1")
                     {
@@ -110,8 +110,8 @@ namespace lib_j.control
                     Console.WriteLine("      등록된 총 책의 수 : " + Library.bookList.Count + " 권");
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Console.ReadLine();
+                    Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                    string outNum = Custom.Instance.ReadPhone();
 
                     if (outNum == "1")
                     {
@@ -133,7 +133,7 @@ namespace lib_j.control
                     bool isName = false;
                     while(isName == false)
                     {
-                        string name = Console.ReadLine();
+                        string name = Custom.Instance.ReadKor();
 
                         for (int i = 0; i < Library.memberList.Count; i++)
                         {
@@ -165,8 +165,8 @@ namespace lib_j.control
                     }
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Console.ReadLine();
+                    Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                    string outNum = Custom.Instance.ReadPhone();
 
                     if (outNum == "1")
                     {
@@ -189,7 +189,7 @@ namespace lib_j.control
                     bool isName = false;
                     while (isName == false)
                     {
-                        string name = Console.ReadLine();
+                        string name = Custom.Instance.ReadKor();
 
                         for (int i = 0; i < Library.memberList.Count; i++)
                         {
@@ -216,8 +216,8 @@ namespace lib_j.control
                     Console.WriteLine("   정상적으로 삭제 되었습니다 ! ");
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Console.ReadLine();
+                    Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                    string outNum = Custom.Instance.ReadPhone();
 
                     if (outNum == "1")
                     {
@@ -239,11 +239,12 @@ namespace lib_j.control
                     bool isTitle = false;
                     while (isTitle == false)
                     {
-                        string title = Console.ReadLine();
+                        string title = Custom.Instance.ReadKor();
 
                         for (int i = 0; i < Library.bookList.Count; i++)
                         {
-                            if (Library.bookList[i].Title == title)
+                            string noSpace = Library.bookList[i].Title.Replace(" ", "");
+                            if (Library.bookList[i].Title == title || noSpace == title)
                             {
                                 Console.Clear();
                                 Screen.Instance.basicScreen();
@@ -252,7 +253,7 @@ namespace lib_j.control
                                 Console.WriteLine();
                                 Console.WriteLine();
                                 Console.Write("   책 '" + Library.bookList[i].Title + "' 수정할 수량 입력 : ");
-                                Library.bookList[i].Quantity = Convert.ToInt32(Console.ReadLine()); ;
+                                Library.bookList[i].Quantity = Convert.ToInt32(Custom.Instance.ReadPhone()); ;
                                 Custom.Instance.updataBookListData();
                                 isTitle = true;
                                 break;
@@ -271,13 +272,14 @@ namespace lib_j.control
                         }
                     }
                         Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("   책 정보가 수정 되었습니다 ! ");
                         Console.WriteLine();
                         Console.WriteLine();
-                        Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                        string outNum = Console.ReadLine();
+                        Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                        string outNum = Custom.Instance.ReadPhone();
 
-                        if (outNum == "1")
+                    if (outNum == "1")
                         {
                             isManager = false;
                             break;
@@ -294,22 +296,76 @@ namespace lib_j.control
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("      책 ID 입력 (입력 예시 : ID 1234) : ");
-                    string id = Console.ReadLine();
+                    string id = "";
+                    bool isOverlap = true;
+                    while (isOverlap == true)
+                    {
+                        int overlapCount = 0;
+                        id = Custom.Instance.ReadEngNum();
+
+                        for (int i = 0; i < Library.bookList.Count; i++)
+                        {
+                            if (Library.bookList[i].Id == id)
+                            {
+                                overlapCount += 1;
+                            }
+                        }
+                        if (overlapCount > 0)
+                        {
+                            Console.Clear();
+                            Screen.Instance.basicScreen();
+                            Console.WriteLine();
+                            Console.WriteLine("                    ▣ 신규 책 등록 ▣");
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.Write("      이미 존재하는 ID 넘버 입니다. 다른 ID 넘버를 입력해 주세요. (입력 예시 : ID 1234) : ");
+                        }
+                        else if (overlapCount == 0)
+                        {
+                            isOverlap = false;
+                            break;
+                        }
+                    }
+                    
                     Console.WriteLine();
                     Console.Write("      책 이름 입력 : ");
-                    string title = Console.ReadLine();
+                    string title = "";
+                    bool isOverlap2 = true;
+                    while (isOverlap2 == true)
+                    {
+                        title = Custom.Instance.ReadString();
+                        int overlapCount = 0;
+                        for (int i = 0; i < Library.bookList.Count; i++)
+                        {
+                            if (Library.bookList[i].Title== title)
+                            {
+                                overlapCount += 1;
+                            }
+
+                        }
+                        if (overlapCount > 0)
+                        {
+                            Console.WriteLine();
+                            Console.Write("      이미 소장중인 책 입니다. 다른 책 이름을 입력해 주세요 : ");
+                        }
+                        else if (overlapCount == 0)
+                        {
+                            isOverlap2 = false;
+                            break;
+                        }
+                    }
                     Console.WriteLine();
                     Console.Write("      책 저자 입력 : ");
-                    string writer = Console.ReadLine();
+                    string writer = Custom.Instance.ReadString();
                     Console.WriteLine();
                     Console.Write("      책 출판사 입력 : ");
-                    string publisher = Console.ReadLine();
+                    string publisher = Custom.Instance.ReadString();
                     Console.WriteLine();
                     Console.Write("      책 가격 입력 : ");
-                    int price = Convert.ToInt32(Console.ReadLine());
+                    int price = Convert.ToInt32(Custom.Instance.ReadPhone());
                     Console.WriteLine();
                     Console.Write("      책 수량 입력 : ");
-                    int quantity = Convert.ToInt32(Console.ReadLine());
+                    int quantity = Convert.ToInt32(Custom.Instance.ReadPhone());
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.WriteLine("      정상적으로 등록 되었습니다 ! ");
@@ -327,8 +383,8 @@ namespace lib_j.control
 
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Console.ReadLine();
+                    Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                    string outNum = Custom.Instance.ReadPhone();
                     if (outNum == "1")
                     {
                         isManager = false;
@@ -350,7 +406,7 @@ namespace lib_j.control
                     bool isTitle = false;
                     while (isTitle == false)
                     {
-                        string title = Console.ReadLine();
+                        string title = Custom.Instance.ReadString();
 
                         for (int i = 0; i < Library.bookList.Count; i++)
                         {
@@ -376,8 +432,8 @@ namespace lib_j.control
                     Console.WriteLine("   정상적으로 삭제 되었습니다 ! ");
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Console.ReadLine();
+                    Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                    string outNum = Custom.Instance.ReadPhone();
 
                     if (outNum == "1")
                     {
@@ -401,8 +457,8 @@ namespace lib_j.control
                         Console.WriteLine();
                     }
                     Console.WriteLine();
-                    Console.Write("   관리자 메뉴로 돌아가기는 'Enter'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Console.ReadLine();
+                    Console.Write("   관리자 메뉴로 돌아가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
+                    string outNum = Custom.Instance.ReadPhone();
 
                     if (outNum == "1")
                     {

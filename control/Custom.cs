@@ -111,5 +111,300 @@ namespace lib_j.control
             ws.Close();
         } //대출 반납 리스트에 추가하기
 
+        public string ReadString()    //string 입력하는 메소드, 뒤로가기때문에 (한글 영어 숫자 다 됨)
+        {
+            string readString = "";
+            ConsoleKeyInfo key;
+            while (true)
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape
+                    && IsString(key))
+                {
+                    readString += key.KeyChar;
+                    Console.Write(key.KeyChar);
+                }
+                else if (key.Key == ConsoleKey.Backspace && readString.Length > 0)
+                {
+                    int lastIndex = readString.Length - 1;
+                    if (readString[lastIndex] >= '가' && readString[lastIndex] <= '힣')       //한글일경우
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));
+                        Console.Write("\b\b  \b\b");
+                    }
+                    else
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));  //한글 이외의 문자.
+                        Console.Write("\b \b");
+                    }
+                }
+                else if (key.Key == ConsoleKey.Escape)      //esc 누를 경우 null 반환
+                {
+                    return "\0";
+                }
+                else if (key.Key == ConsoleKey.Enter)       //엔터를 누를경우 저장된 스트링 반환
+                {
+                    if (readString == "")
+                        continue;
+                    return readString;
+                }
+            }
+        }
+
+        public bool IsString(ConsoleKeyInfo key)      //한글영어숫자만을 입력받기 위해인지 테스트
+        {
+            char trying = key.KeyChar;
+            if (key == null) return false;
+            if ((key.KeyChar >= 'a' && key.KeyChar <= 'z') || (key.KeyChar >= 'A' && key.KeyChar <= 'Z') || (key.KeyChar >= '0' && key.KeyChar <= '9') ||
+                (key.KeyChar >= '가' && key.KeyChar <= '힣') || key.KeyChar == ' ')
+                return true;
+            return false;
+        }
+
+        public string ReadEngNum()    // 영어 숫자만 입력하는 메소드
+        {
+            string readString = "";
+            ConsoleKeyInfo key;
+            while (true)
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape
+                    && IsEngNumString(key))
+                {
+                    readString += key.KeyChar;
+                    Console.Write(key.KeyChar);
+                }
+                else if (key.Key == ConsoleKey.Backspace && readString.Length > 0)
+                {
+                    int lastIndex = readString.Length - 1;
+                    if (readString[lastIndex] >= '가' && readString[lastIndex] <= '힣')       //한글일경우
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));
+                        Console.Write("\b\b  \b\b");
+                    }
+                    else
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));  //한글 이외의 문자.
+                        Console.Write("\b \b");
+                    }
+                }
+                else if (key.Key == ConsoleKey.Escape)      //esc 누를 경우 null 반환
+                {
+                    return "\0";
+                }
+                else if (key.Key == ConsoleKey.Enter)       //엔터를 누를경우 저장된 스트링 반환
+                {
+                    if (readString == "")
+                        continue;
+                    return readString;
+                }
+            }
+        }
+
+        public bool IsEngNumString(ConsoleKeyInfo key)      //영어숫자
+        {
+            char trying = key.KeyChar;
+            if (key == null) return false;
+            if ((key.KeyChar >= 'a' && key.KeyChar <= 'z') || (key.KeyChar >= 'A' && key.KeyChar <= 'Z') || (key.KeyChar >= '0' && key.KeyChar <= '9') ||key.KeyChar == ' ')
+                return true;
+            return false;
+        }
+
+        public string ReadPW()    // 비번 입력하는 메소드
+        {
+            string readString = "";
+            ConsoleKeyInfo key;
+            while (true)
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape
+                    && IsEngNumString(key))
+                {
+                    readString += key.KeyChar;
+                    Console.Write(key.KeyChar);
+                }
+                else if (key.Key == ConsoleKey.Backspace && readString.Length > 0)
+                {
+                    int lastIndex = readString.Length - 1;
+                    if (readString[lastIndex] >= '가' && readString[lastIndex] <= '힣')       //한글일경우
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));
+                        Console.Write("\b\b  \b\b");
+                    }
+                    else
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));  //한글 이외의 문자.
+                        Console.Write("*");
+                    }
+                }
+                else if (key.Key == ConsoleKey.Escape)      //esc 누를 경우 null 반환
+                {
+                    return "\0";
+                }
+                else if (key.Key == ConsoleKey.Enter)       //엔터를 누를경우 저장된 스트링 반환
+                {
+                    if (readString == "")
+                        continue;
+                    return readString;
+                }
+            }
+        }
+
+        public string ReadPhone()    //숫자 길이제한
+        {
+            string readString = "";
+           
+            ConsoleKeyInfo key;
+            while (true)
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape
+                    && IsNumString(key))
+                {
+                    readString += key.KeyChar;
+                    Console.Write(key.KeyChar);
+                }
+                else if (key.Key == ConsoleKey.Backspace && readString.Length > 0)
+                {
+                    int lastIndex = readString.Length - 1;
+                    if (readString[lastIndex] >= '가' && readString[lastIndex] <= '힣')       //한글일경우
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));
+                        Console.Write("\b\b  \b\b");
+                    }
+                    else
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));  //한글 이외의 문자.
+                        Console.Write("\b \b");
+                    }
+                }
+                else if (key.Key == ConsoleKey.Escape)      //esc 누를 경우 null 반환
+                {
+                    return "\0";
+                }
+                else if (key.Key == ConsoleKey.Enter)       //엔터를 누를경우 저장된 스트링 반환
+                {
+                    if (readString == "")
+                        continue;
+                    return readString;
+                }
+            }
+        }
+
+        public bool IsNumString(ConsoleKeyInfo key)      //숫자
+        {
+            char trying = key.KeyChar;
+            if (key == null) return false;
+            if ((key.KeyChar != '-') && (key.KeyChar >= '0' && key.KeyChar <= '9') || key.KeyChar == ' ')
+                return true;
+            return false;
+        }
+
+        public string ReadKor()    //한글만 입력하는 메소드
+        {
+            string readString = "";
+            ConsoleKeyInfo key;
+            while (true)
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape
+                    && IsKoreanString(key))
+                {
+                    readString += key.KeyChar;
+                    Console.Write(key.KeyChar);
+                }
+                else if (key.Key == ConsoleKey.Backspace && readString.Length > 0)
+                {
+                    int lastIndex = readString.Length - 1;
+                    if (readString[lastIndex] >= '가' && readString[lastIndex] <= '힣')       //한글일경우
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));
+                        Console.Write("\b\b  \b\b");
+                    }
+                    else
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));  //한글 이외의 문자.
+                        Console.Write("\b \b");
+                    }
+                }
+                else if (key.Key == ConsoleKey.Escape)      //esc 누를 경우 null 반환
+                {
+                    return "\0";
+                }
+                else if (key.Key == ConsoleKey.Enter)       //엔터를 누를경우 저장된 스트링 반환
+                {
+                    if (readString == "")
+                        continue;
+                    return readString;
+                }
+            }
+        }
+
+        public bool IsKoreanString(ConsoleKeyInfo key)      //한글
+        {
+            char trying = key.KeyChar;
+            if (key == null) return false;
+            if ((key.KeyChar >= '가' && key.KeyChar <= '힣') || key.KeyChar == ' ')
+                return true;
+            return false;
+        }
+
+        public string ReadBack()    //돌아가기 또는 메인
+        {
+            string readString = "";
+
+            ConsoleKeyInfo key;
+            while (true)
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape
+                    && IsBackString(key))
+                {
+                    readString += key.KeyChar;
+                    Console.Write(key.KeyChar);
+                }
+                else if (key.Key == ConsoleKey.Backspace && readString.Length > 0)
+                {
+                    int lastIndex = readString.Length - 1;
+                    if (readString[lastIndex] >= '가' && readString[lastIndex] <= '힣')       //한글일경우
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));
+                        Console.Write("\b\b  \b\b");
+                    }
+                    else
+                    {
+                        readString = readString.Substring(0, (readString.Length - 1));  //한글 이외의 문자.
+                        Console.Write("\b \b");
+                    }
+                }
+                else if (key.Key == ConsoleKey.Escape)      //esc 누를 경우 null 반환
+                {
+                    return "\0";
+                }
+                else if (key.Key == ConsoleKey.Enter)       //엔터를 누를경우 저장된 스트링 반환
+                {
+                    if (readString == "")
+                        continue;
+                    return readString;
+                }
+            }
+        }
+
+        public bool IsBackString(ConsoleKeyInfo key)      //1 또는 엔터
+        {
+            char trying = key.KeyChar;
+            if (key == null) return false;
+            if ((key.KeyChar == '1') || key.KeyChar == ' ')
+                return true;
+            return false;
+        }
+
+       
     }
 }

@@ -326,7 +326,7 @@ namespace lib_j.control
                             break;
                         }
                     }
-                    
+                    Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("      책 이름 입력 : ");
                     string title = "";
@@ -346,6 +346,7 @@ namespace lib_j.control
                         if (overlapCount > 0)
                         {
                             Console.WriteLine();
+                            Console.WriteLine();
                             Console.Write("      이미 소장중인 책 입니다. 다른 책 이름을 입력해 주세요 : ");
                         }
                         else if (overlapCount == 0)
@@ -355,17 +356,22 @@ namespace lib_j.control
                         }
                     }
                     Console.WriteLine();
+                    Console.WriteLine();
                     Console.Write("      책 저자 입력 : ");
                     string writer = Custom.Instance.ReadString();
+                    Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("      책 출판사 입력 : ");
                     string publisher = Custom.Instance.ReadString();
                     Console.WriteLine();
+                    Console.WriteLine();
                     Console.Write("      책 가격 입력 : ");
                     int price = Convert.ToInt32(Custom.Instance.ReadPhone());
                     Console.WriteLine();
+                    Console.WriteLine();
                     Console.Write("      책 수량 입력 : ");
                     int quantity = Convert.ToInt32(Custom.Instance.ReadPhone());
+
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.WriteLine("      정상적으로 등록 되었습니다 ! ");
@@ -413,6 +419,8 @@ namespace lib_j.control
                             if (Library.bookList[i].Title == title)
                             {
                                 Library.bookList.Remove(Library.bookList[i]);
+                                Custom.Instance.updataBookListData(); //정보 가져오기
+                               
                                 isTitle = true;
                                 break;
                             }

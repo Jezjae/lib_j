@@ -21,6 +21,7 @@ namespace lib_j
 
             Custom.Instance.readBookListData(); //정보 가져오기
             Custom.Instance.readMemberListData();
+            Custom.Instance.readHistoryData();
 
             Console.Write("      회원 ID를 입력하세요 (English and Number) : ");
 
@@ -56,7 +57,7 @@ namespace lib_j
             bool isPw = false;
             while (isPw == false)
             {
-                string pw = Custom.Instance.ReadPW();
+                string pw = Custom.Instance.ReadEngNum();
                 
                 for (int i = 0; i < Library.memberList.Count; i++)
                 {
@@ -84,8 +85,15 @@ namespace lib_j
                 Screen.Instance.libSub();
                 string num = Custom.Instance.ReadPhone();
 
+                Custom.Instance.readBookListData(); //정보 가져오기
+                Custom.Instance.readMemberListData();
+                Custom.Instance.readHistoryData();
+
                 if (num == "1")
                 {
+                    Custom.Instance.readBookListData(); //정보 가져오기
+                    Custom.Instance.readMemberListData();
+                    Custom.Instance.readHistoryData();
                     bool isBack = false;
                     while (isBack == false)
                     {
@@ -278,6 +286,10 @@ namespace lib_j
                 } //검색
                 else if (num == "2")
                 {
+                    Custom.Instance.readBookListData(); //정보 가져오기
+                    Custom.Instance.readMemberListData();
+                    Custom.Instance.readHistoryData();
+
                     Console.Clear();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
@@ -349,6 +361,7 @@ namespace lib_j
                                         Library.historyList.Add(History.Instance); //히스토리에 넣기
 
                                         Console.WriteLine();
+                                        Console.WriteLine();
                                         Console.WriteLine("   책 '" + Library.bookList[i].Title + "' 대출 완료 !");
                                         Custom.Instance.updataBookListData();
                                         Custom.Instance.updataMemberListData();
@@ -388,6 +401,10 @@ namespace lib_j
                 } //책 대출
                 else if (num == "3")
                 {
+                    Custom.Instance.readBookListData(); //정보 가져오기
+                    Custom.Instance.readMemberListData();
+                    Custom.Instance.readHistoryData();
+
                     Console.Clear();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
@@ -493,6 +510,10 @@ namespace lib_j
                 } //책 반납
                 else if (num == "4")
                 {
+                    Custom.Instance.readBookListData(); //정보 가져오기
+                    Custom.Instance.readMemberListData();
+                    Custom.Instance.readHistoryData();
+
                     Console.Clear();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();
@@ -534,6 +555,10 @@ namespace lib_j
                 } //책 리스트
                 else if (num == "5")
                 {
+                    Custom.Instance.readBookListData(); //정보 가져오기
+                    Custom.Instance.readMemberListData();
+                    Custom.Instance.readHistoryData();
+
                     Console.Clear();
                     Screen.Instance.basicScreen();
                     Console.WriteLine();

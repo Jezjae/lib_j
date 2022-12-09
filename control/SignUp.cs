@@ -115,7 +115,7 @@ namespace lib_j
             Console.WriteLine("      회원가입이 완료 되었습니다 ! ");
             Console.WriteLine();
             Console.WriteLine();
-            Console.Write("      'Space Bar'를 눌러주세요. ");
+            Console.Write("      'Enter'를 눌러주세요. ");
             Console.ReadLine();
 
             Console.Clear();

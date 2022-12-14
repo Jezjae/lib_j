@@ -83,11 +83,12 @@ namespace lib_j
             {
                 Console.Clear();
                 Screen.Instance.libSub();
-                string num = Custom.Instance.ReadPhone();
+                string num = Custom.Instance.ReadNum();
 
                 Custom.Instance.readBookListData(); //정보 가져오기
                 Custom.Instance.readMemberListData();
                 Custom.Instance.readHistoryData();
+                Custom.Instance.readloanData();
 
                 if (num == "1")
                 {
@@ -150,7 +151,7 @@ namespace lib_j
                             Console.WriteLine();
                             Console.WriteLine();
                             Console.Write("   뒤로가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                            string outNum = Custom.Instance.ReadPhone();
+                            string outNum = Custom.Instance.ReadNum();
 
                             if (outNum == "1")
                             {
@@ -209,7 +210,7 @@ namespace lib_j
                             Console.WriteLine();
                             Console.WriteLine();
                             Console.Write("   뒤로가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                            string outNum = Custom.Instance.ReadPhone();
+                            string outNum = Custom.Instance.ReadNum();
 
                             if (outNum == "1")
                             {
@@ -267,7 +268,7 @@ namespace lib_j
                             Console.WriteLine();
                             Console.WriteLine();
                             Console.Write("   뒤로가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                            string outNum = Custom.Instance.ReadPhone();
+                            string outNum = Custom.Instance.ReadNum();
 
                             if (outNum == "1")
                             {
@@ -289,6 +290,7 @@ namespace lib_j
                     Custom.Instance.readBookListData(); //정보 가져오기
                     Custom.Instance.readMemberListData();
                     Custom.Instance.readHistoryData();
+                    Custom.Instance.readloanData();
 
                     Console.Clear();
                     Screen.Instance.basicScreen();
@@ -333,13 +335,13 @@ namespace lib_j
                             bool isBookId = false;
                             while(isBookId == false)
                             {
-                                string bookId = Custom.Instance.ReadEngNum();
+                                string bookId = Custom.Instance.ReadBookID();
                                 for (int i = 0; i < Library.bookList.Count; i++)
                                 {
-                                    if (Library.bookList[i].Id == bookId)
+                                    if (Library.bookList[i].Id == bookId && Library.bookList[i].Quantity > 0)
                                     {
                                         isBookId = true;
-
+                                        
                                         //전체 책 개수 줄이기
                                         Library.bookList[i].Quantity -= 1;
 
@@ -363,12 +365,22 @@ namespace lib_j
                                         Console.WriteLine();
                                         Console.WriteLine();
                                         Console.WriteLine("   책 '" + Library.bookList[i].Title + "' 대출 완료 !");
+                                        Custom.Instance.updataloansData();
                                         Custom.Instance.updataBookListData();
                                         Custom.Instance.updataMemberListData();
                                         Custom.Instance.updataHistoryData();
 
                                     }
+                                    else if(Library.bookList[i].Id == bookId && Library.bookList[i].Quantity <= 0)
+                                    {
+                                        Console.WriteLine();
+                                        Console.Write("   대여하려는 책의 재고가 없습니다.");
+                                        Console.WriteLine();
+                                        isBookId = true;
+                                    }
+                                   
                                 }
+
                                 if (isBookId == false)
                                 {
                                     Console.WriteLine();
@@ -390,8 +402,9 @@ namespace lib_j
                     }
                     Console.WriteLine();
                     Console.WriteLine();
+                    Console.WriteLine();
                     Console.Write("   뒤로가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Custom.Instance.ReadPhone();
+                    string outNum = Custom.Instance.ReadNum();
                     if (outNum == "1")
                     {
                         Console.Clear();
@@ -404,6 +417,7 @@ namespace lib_j
                     Custom.Instance.readBookListData(); //정보 가져오기
                     Custom.Instance.readMemberListData();
                     Custom.Instance.readHistoryData();
+                    Custom.Instance.readloanData();
 
                     Console.Clear();
                     Screen.Instance.basicScreen();
@@ -442,7 +456,7 @@ namespace lib_j
                     bool isNum = false;
                     while(isNum == false)
                     {
-                        string selec = Custom.Instance.ReadPhone();
+                        string selec = Custom.Instance.ReadNum();
                         int selecNum = Convert.ToInt32(selec);
                         for (int i = 0; i < tempBook.Count; i++)
                         {
@@ -484,6 +498,7 @@ namespace lib_j
                                         Custom.Instance.updataBookListData();
                                         Custom.Instance.updataMemberListData();
                                         Custom.Instance.updataHistoryData();
+                                        Custom.Instance.updataloansData();
 
                                     }
                                 }
@@ -499,7 +514,7 @@ namespace lib_j
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("   뒤로가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Custom.Instance.ReadPhone();
+                    string outNum = Custom.Instance.ReadNum();
                     if (outNum == "1")
                     {
                         Console.Clear();
@@ -544,7 +559,7 @@ namespace lib_j
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("   뒤로가기 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                    string outNum = Custom.Instance.ReadPhone();
+                    string outNum = Custom.Instance.ReadNum();
 
                     if (outNum == "1")
                     {
@@ -587,7 +602,7 @@ namespace lib_j
                             Console.WriteLine("   뒤로가기 'Esc'를, 처음 메뉴로 돌아가기는 '1'번을,");
                             Console.WriteLine();
                             Console.Write("   휴대폰 번호를 수정하려면 '2'번을, 주소를 수정하려면 '3'번을 입력해 주세요 : ");
-                            string renum = Custom.Instance.ReadPhone();
+                            string renum = Custom.Instance.ReadNum();
                             if (renum == "1")
                             {
                                 Console.Clear();
@@ -605,7 +620,7 @@ namespace lib_j
                                 Console.WriteLine();
                                 Console.WriteLine();
                                 Console.Write("   뒤로가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                                string outNum = Custom.Instance.ReadPhone();
+                                string outNum = Custom.Instance.ReadNum();
 
                                 if (outNum == "1")
                                 {
@@ -626,7 +641,7 @@ namespace lib_j
                                 Console.WriteLine();
                                 Console.WriteLine();
                                 Console.Write("   뒤로가기는 'Esc'를, 처음 메뉴로 돌아가기는 '1'을 입력해 주세요. : ");
-                                string outNum = Custom.Instance.ReadPhone();
+                                string outNum = Custom.Instance.ReadNum();
 
                                 if (outNum == "1")
                                 {

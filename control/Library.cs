@@ -22,7 +22,8 @@ namespace lib_j
             {
                 Screen.Instance.libMainScreen();
 
-                string num = Custom.Instance.ReadPhone();
+                string num = Custom.Instance.ReadNum();
+
 
                 if (num == "1")
                 {

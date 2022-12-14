@@ -56,7 +56,7 @@ namespace lib_j
             bool isOverlap2 = true;
             while (isOverlap2 == true)
             {
-                name = Custom.Instance.ReadKor();
+                name = Custom.Instance.ReadName();
                 int overlapCount = 0;
                 for (int i = 0; i < Library.memberList.Count; i++)
                 {
@@ -87,11 +87,31 @@ namespace lib_j
             Console.WriteLine();
             Console.WriteLine();
             Console.Write("      " + name + " 님의 나이 입력 : ");
-            int age = Convert.ToInt32(Custom.Instance.ReadPhone());
+            int age = Convert.ToInt32(Custom.Instance.ReadNum());
+
             Console.WriteLine();
             Console.WriteLine();
             Console.Write("      " + name + " 님의 핸드폰 번호 입력 ('-' 제외하고 입력) : ");
-            string phone = Custom.Instance.ReadPhone();
+            string phone = "";
+            bool is010 = false;
+            while (is010 == false)
+            {
+                phone = Custom.Instance.ReadPhone();
+
+                if (phone.Substring(0, 3) == "010")
+                {
+                    is010 = true;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.Write("      핸드폰 번호의 맨 앞은 '010'으로 입력해야 합니다. 다시 입력해 주세요. : ");
+                }
+
+            }
+
             Console.WriteLine();
             Console.WriteLine();
             Console.Write("      " + name + " 님의 주소 입력 : ");

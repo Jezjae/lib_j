@@ -9,18 +9,6 @@ namespace lib_j.model
     [Serializable]
     public class Book
     {
-        private static Book BookInstance = null;
-
-        public static Book Instance               //싱글톤 패턴으로 선언
-        {
-            get
-            {
-                if (BookInstance == null)
-                    BookInstance = new Book();
-                return BookInstance;
-            }
-        }
-
         private string id;
         private string title;
         private string writer;
